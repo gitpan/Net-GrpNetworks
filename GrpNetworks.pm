@@ -12,14 +12,14 @@ require Exporter;
 @EXPORT = qw(
 	
 );
-$VERSION = '1.07';
+$VERSION = '1.08';
 
 # Preloaded methods go here.
 
 sub new
    {
    my $class = shift;
-   my $GrpNet = { [{}] };
+   my $GrpNet = {};
 
    bless $GrpNet, $class;
    return $GrpNet; 
@@ -32,15 +32,13 @@ sub find
    my($ret, $first, $middle, $last, $int_ip);
 
    $first = 0;
-   $last = @{$obj->{'Net'}};
+   $last = $#{$obj->{'Net'}};
    $int_ip = ip2int($ip);
    while ( $last >= $first and $ret eq '' )
       {
       $middle = int(($last + $first)/2);
-#      print "$first - $middle - $last\n";
       if ( $obj->{'Net'}[$middle]{'Network'} <= $int_ip ) # May be the correct network
          {
-#         print "$obj->{'Net'}[$middle]{'Network'} e menor ou igual a $int_ip\n";
          if ( ($int_ip & $obj->{'Net'}[$middle]{'Mask'}) == $obj->{'Net'}[$middle]{'Network'} )
             {
             $ret = $obj->{'Net'}[$middle]{'Name'};
@@ -163,7 +161,7 @@ __END__
 
 =head1 NAME
 
-Net::GrpNetworks - Perl extension to determine in which network group a IP belongs. 
+Net::GrpNetworks - Perl extension to determine in which network group a IP belongs to. 
 
 =head1 SYNOPSIS
 
@@ -177,8 +175,8 @@ Net::GrpNetworks - Perl extension to determine in which network group a IP belon
 
 =head1 DESCRIPTION
 
-Net::GrpNetworks creates network group and it allows that, later, we can research 
-for certain IPs to discover in which network group that IP belongs.
+Net::GrpNetworks creates network groups and allows researching 
+for specific IPs discovering in which network group each IP belongs to.
 
 For example:
 
