@@ -12,7 +12,7 @@ require Exporter;
 @EXPORT = qw(
 	
 );
-$VERSION = '1.06';
+$VERSION = '1.07';
 
 # Preloaded methods go here.
 
@@ -171,7 +171,7 @@ Net::GrpNetworks - Perl extension to determine in which network group a IP belon
 
   $grpnet = new Net::GrpNetworks();
 
-  $grpnet->add(group name, network block, netmaks);
+  $grpnet->add(group name, network block, netmask);
   $GroupName = $grpnet->find(IP); 
 
 
